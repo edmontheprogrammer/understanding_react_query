@@ -1,6 +1,4 @@
-// import Example from "./Example";
-
-import { useQuery, useMutation, useQueryClient, QueryClient } from "@tanstack/react-query";
+import Example from "./Example";
 
 /*
 
@@ -34,45 +32,14 @@ import { useQuery, useMutation, useQueryClient, QueryClient } from "@tanstack/re
 
 */
 
-// This is the data set we will use for our App. IN a real project will be data
-// coming from the Django rest framework's APIs.
-const POSTS = [
-  { id: 1, title: "POST 1" },
-  { id: 2, title: "POST 2" },
-];
+import React from "react";
 
-function App() {
-  console.log(POSTS); 
-
-  const queryClient = new QueryClient()
-
-  const postsQuery = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => wait(1000).then(() => [...POSTS]),
-  });
-
-  /*
-    * These two statments are run if your in the "Loading" state and the "Error" state
-      ... it also means that you should be in the "Data" state by default
-          if your not in the "Loading" or "Error" state.  
-  */
-  if (postsQuery.isLoading) return <h1>Loading...</h1>;
-  if (postsQuery.isError) {
-    return <pre>{JSON.stringify(postsQuery.error)}</pre>;
-  }
-
+const App = () => {
   return (
-    <div>
-      {postsQuery.data.map((post) => (
-        <div key={post.id}> {post.title}</div>
-      ))}
-
-    </div>
+    <>
+      <Example />
+    </>
   );
-}
-
-function wait(duration) {
-  return new Promise((resolve) => setTimeout(resolve, duration));
-}
+};
 
 export default App;
